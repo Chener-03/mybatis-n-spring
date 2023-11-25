@@ -342,6 +342,9 @@ public class ClassPathMapperScanner extends ClassPathBeanDefinitionScanner {
    */
   @Override
   protected boolean checkCandidate(String beanName, BeanDefinition beanDefinition) {
+    if (NativeDetector.inNativeImage()){
+      return false;
+    }
     if (super.checkCandidate(beanName, beanDefinition)) {
       return true;
     } else {
